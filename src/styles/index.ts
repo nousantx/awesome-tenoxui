@@ -1,10 +1,8 @@
 // Modified styler.ts
 import { useLayoutEffect } from 'react'
-import { use, tenoxui, applyStyles } from 'tenoxui'
-import { MakeTenoxUI } from '@tenoxui/core'
+import { MakeTenoxUI } from '@tenoxui/core/full'
 import { globalStyles } from './lib/global'
 import { createConfig } from './lib/config'
-import { color, colorValues } from './lib/color'
 import { useTheme } from '../contexts/ThemeProvider'
 
 export function styler() {
@@ -12,10 +10,15 @@ export function styler() {
   const config = createConfig(isDarkMode)
 
   useLayoutEffect(() => {
-    use(config)
-    // applyStyles(globalStyles)
-    tenoxui({ customEngine: MakeTenoxUI })
-  }, [config, color, colorValues, isDarkMode])
+    document.documentElement.setAttribute('child', globalStyles)
+
+    const elements = document.querySelectorAll('*')
+
+    elements.forEach((element) => {
+      const tenoxui = new MakeTenoxUI({ element: element as HTMLElement, ...config })
+      tenoxui.useDOM()
+    })
+  }, [config, isDarkMode])
 
   return config
 }

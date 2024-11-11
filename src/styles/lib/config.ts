@@ -1,11 +1,20 @@
 // Modified config.ts
 import { useMemo } from 'react'
+import type { DefinedValue } from '@tenoxui/core/full'
 import { property } from './properties'
 import { merge } from '@nousantx/someutils'
 import { generateColors } from '@nousantx/color-generator'
-import { color, colorValues } from './color'
+import { standardAttributes, reactAttributes } from '@nousantx/list-attribute'
 import { classes } from './classes'
 import { breakpoints } from './breakpoints'
+
+const color = {
+  neutral: '#577563',
+  // neutral: '#7a7258',
+  primary: '#41f285',
+  secondary: '#0dc82a',
+  red: '#f73e3e'
+}
 
 const dark = generateColors({
   option: {
@@ -14,7 +23,7 @@ const dark = generateColors({
     reverse: true
   },
   color
-})
+}) as DefinedValue
 
 const light = generateColors({
   option: {
@@ -22,13 +31,15 @@ const light = generateColors({
     output: 'rgb-only'
   },
   color
-})
+}) as DefinedValue
 
 export function createConfig(isDarkMode: boolean) {
+  const colorTheme = isDarkMode ? dark : light
+
   return useMemo(
     () => ({
       property,
-      values: merge(isDarkMode ? dark : light, {
+      values: merge(colorTheme, {
         full: '100%',
         family: {
           code: 'JetBrains Mono, monospace',
@@ -36,8 +47,10 @@ export function createConfig(isDarkMode: boolean) {
         }
       }),
       classes,
-      breakpoints
+      breakpoints,
+      attributify: true,
+      attributifyIgnore: [...standardAttributes, ...reactAttributes]
     }),
-    [isDarkMode, colorValues, property, classes, color]
+    [isDarkMode, property, classes, color, colorTheme]
   )
 }
