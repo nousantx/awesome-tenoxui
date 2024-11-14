@@ -1,5 +1,6 @@
-import { Outlet } from 'react-router-dom'
+import { Outlet, Link } from 'react-router-dom'
 import { styler } from '@styler'
+import { RiMoonLine, RiSunLine } from '@remixicon/react'
 import { useTheme } from '../contexts/ThemeProvider'
 
 const AppLayout = () => {
@@ -10,23 +11,26 @@ const AppLayout = () => {
     return (
       <button
         onClick={toggleTheme}
-        className="box-35px center bg-transparent hover:bg-primary-200 bg-opacity-0.3 text-neutral-900 br-6px bw-0"
+        className="box-35px center bg-transparent hover:bg-primary-200 [--bg-opacity]-0.3 text-neutral-900 br-6px bw-0 tr-time-300ms"
         aria-label="Toggle Theme"
       >
-        <span className={`ri ${isDarkMode ? 'ri-sun-line' : 'ri-moon-line'} fs-1.3rem lh-1`}></span>
+        {isDarkMode ? <RiSunLine size="18" /> : <RiMoonLine size="18" />}
       </button>
     )
   }
 
   return (
     <>
-      <div className="flex jc-space-between ai-center">
-        <div className="bg-neutral-200 box-50px">hello</div>
-
+      <header className="flex jc-space-between ai-center px-2rem py-1rem mx-auto w-mx-1280px w-full pn-fixed t-0 l-0 r-0 bg-neutral-50 bg-opacity-0.9">
+        <Link to="/" className="text-neutral-900 center fs-1rem code td-none">
+          tenoxui.style
+        </Link>
         <ThemeButton />
-      </div>
+      </header>
 
-      <Outlet />
+      <main>
+        <Outlet />
+      </main>
     </>
   )
 }

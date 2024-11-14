@@ -8,21 +8,11 @@ export const property: Property = {
     {
       bg: 'backgroundColor',
       text: 'color',
-      shadow: '--shadow-color',
       'bdr-c': 'borderColor'
     },
     'rgb({0} / var(--{1}-opacity, 1))'
   ),
-
-  'bw-b': 'borderBottomWidth',
+  'shadow-c': '--shadow-color',
   'bg-opacity': '--bg-opacity',
-  'text-opacity': '--text-opacity',
-  rotate: {
-    property: 'transform',
-    value: 'rotate({0})'
-  },
-  'back-blur': {
-    property: 'backdropFilter',
-    value: 'blur({0})'
-  }
+  bgc: 'backgroundColor'
 }

@@ -7,14 +7,7 @@ import { generateColors } from '@nousantx/color-generator'
 import { standardAttributes, reactAttributes } from '@nousantx/list-attribute'
 import { classes } from './classes'
 import { breakpoints } from './breakpoints'
-
-const color = {
-  neutral: '#577563',
-  // neutral: '#7a7258',
-  primary: '#41f285',
-  secondary: '#0dc82a',
-  red: '#f73e3e'
-}
+import { color } from './color'
 
 const dark = generateColors({
   option: {
@@ -33,13 +26,26 @@ const light = generateColors({
   color
 }) as DefinedValue
 
+// use `fc-` prefix before color name to use fixed color, it wont affected by dark theme or light theme changes
+
+const fixColor = generateColors({
+  option: {
+    format: 'object2',
+    output: 'rgb-only',
+    prefix: 'fc-'
+  },
+  color
+}) as DefinedValue
+
 export function createConfig(isDarkMode: boolean) {
   const colorTheme = isDarkMode ? dark : light
 
   return useMemo(
     () => ({
       property,
-      values: merge(colorTheme, {
+      values: merge(colorTheme, fixColor, {
+        red: '255 0 0',
+
         full: '100%',
         family: {
           code: 'JetBrains Mono, monospace',

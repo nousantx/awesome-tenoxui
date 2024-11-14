@@ -12,9 +12,9 @@ export function styler() {
   useLayoutEffect(() => {
     document.documentElement.setAttribute('child', globalStyles)
 
-    const elements = document.querySelectorAll('*')
+    const elements = document.querySelectorAll('*:not(#ignore *, .tx-ignore)')
 
-    elements.forEach((element) => {
+    elements.forEach(element => {
       const tenoxui = new MakeTenoxUI({ element: element as HTMLElement, ...config })
       tenoxui.useDOM()
     })
