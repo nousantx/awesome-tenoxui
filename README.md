@@ -2,58 +2,60 @@
 
 ## What's this?
 
-This is a react + vite starter template but uses tenoxui css framework for styling.
+This is a react + vite starter template but using tenoxui as styling framework.
 
 ## How's it looks like
 
-This is how the new style looks like :
+This is how the new styles looks like :
 
-```js
-import tenoxui, { use, makeStyles } from 'tenoxui'
-import property from '@tenoxui/property'
+```javascript
+import { tenoxui, use, applyStyles } from 'tenoxui'
+import { property } from '@tenoxui/property'
 
-const styles = () => {
-  use(property)
-
-  makeStyles({
-    body: 'm-0 d-flex place-items-center w-mn-320px h-mn-100vh',
-    '#root': 'w-mx-1280px mh-auto'
-    // more styles
-  })
-
-  tenoxui()
-}
+use({ property })
+applyStyles({
+  body: 'm-0 d-flex place-items-center w-mn-320px h-mn-100vh',
+  '#root': 'w-mx-1280px mx-auto'
+  // more styles
+})
+tenoxui()
 ```
 
 Here's the breakdown :
 
 1. Import all necessary module
 
-```js
-import tenoxui, { use, makeStyles } from 'tenoxui'
-import property from '@tenoxui/property'
+```javascript
+import { tenoxui, use, applyStyles } from 'tenoxui'
+import { property } from '@tenoxui/property'
 ```
 
 2. What is `property`?
 
-```js
-import property from '@tenoxui/property'
+```javascript
+import { property } from '@tenoxui/property'
 
-const styles = () => {
-  use(property)
+console.log(property)
 
-  // other code
-}
+// Output:
+// {
+//   bg: 'background',
+//   p: 'padding',
+//   px: ['paddingLeft', 'paddingRight'],
+// }
 ```
 
-`property` can optionally imported if you don't wanna re-define your types and properties manually. The `property` is basically bunch of types and properties that already defined before and you can just include it to your project.
+`property` can optionally imported if you don't wanna rewrite your types and properties manually. The `property` is basically pre-defined types and properties (or shorthands) that ready to use.
 
 3. `use` function
 
-`use` is a function can store your types and properties. It will make sure the functions like `makeStyles()` and `tenoxui()` knows which class names they need to process or can processed.
+`use` is a function can store your tenoxui configuration. It will make sure the functions like `applyStyles()` and `tenoxui()`
 
-```js
-use({ c: 'color', fs: 'fontSize' })
+```javascript
+use({
+  property: { c: 'color', fs: 'fontSize' },
+  values: { full: '100%' }
+})
 ```
 
 After added some types and properties inside of it, you can immediately use the types as prefix class to your element :
@@ -62,10 +64,10 @@ After added some types and properties inside of it, you can immediately use the 
 <h1 class="c-#ccf654 fs-3rem">Hello World!</h1>
 ```
 
-4. `makeStyles` function
+4. `applyStyles` function
 
-```js
-makeStyles({
+```javascript
+applyStyles({
   body: 'bg-red',
   'p.text': 'fs-0.8rem'
   // more
@@ -74,9 +76,9 @@ makeStyles({
 
 This function allows you to give styles using specific selectors.
 
-5. Applying the styles
+5. Applying the styles (React)
 
-```jsx
+```javascript
 import { useLayoutEffect } from 'react'
 
 function App() {
@@ -87,8 +89,6 @@ function App() {
   return <h1 className="c-#ccf654 fs-3rem">Hello World!</h1>
 }
 ```
-
-Not sure about this method, but it fast for developing your apps, styles will be applied to your element after a change to the className. The `useLayoutEffect`very rarely used rather than `useEffect`. But, since tenoxui is using DOM to handle the styling, `useLayoutEffect` make sure the style applied at the right time. Thanks :D
 
 ## Getting Started with TenoxUI
 
@@ -104,13 +104,13 @@ npm i tenoxui --save-dev
 
 Here's a simple configuration on your `App.jsx` file :
 
-```jsx
+```javascript
 import { useLayoutEffect } from 'react'
-import tenoxui from 'tenoxui'
+import { tenoxui } from 'tenoxui'
 
 const App = () => {
   useLayoutEffect(() => {
-    tenoxui({ c: 'color' })
+    tenoxui({ property: { c: 'color' } })
   }, [])
 
   return <h1 className="c-#ccf654">Hello World!</h1>
@@ -119,9 +119,3 @@ const App = () => {
 export default App
 ```
 
-## Resources
-
-- React : https://react.dev
-- Vite : https://vitejs.dev
-- Typescript : https://www.typescriptlang.org
-- TenoxUI : https://tenoxui.web.app
