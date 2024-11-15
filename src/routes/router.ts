@@ -3,11 +3,7 @@
 
 import { components, hooks, utils } from '@generouted/react-router/client'
 
-export type Path =
-  | `/`
-  | `/showcase/*`
-  | `/showcase/button`
-  | `/showcase/card`
+export type Path = `/` | `/showcase/*` | `/showcase/button` | `/showcase/card`
 
 export type Params = {
   '/showcase/*': { '*': string }

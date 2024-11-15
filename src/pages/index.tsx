@@ -14,7 +14,9 @@ const Home = () => {
         </p>
 
         <div className="mt-1rem center gap-8px">
-          <Link to="/showcase/button" className="text">Explore Components</Link>
+          <Link to="/showcase/button" className="text">
+            Explore Components
+          </Link>
           <Link className="text">GitHub</Link>
         </div>
       </header>

@@ -14,7 +14,7 @@ export function styler() {
 
     const elements = document.querySelectorAll('*:not(#ignore *, .tx-ignore)')
 
-    elements.forEach(element => {
+    elements.forEach((element) => {
       const tenoxui = new MakeTenoxUI({ element: element as HTMLElement, ...config })
       tenoxui.useDOM()
     })

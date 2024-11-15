@@ -7,5 +7,5 @@ export const color = {
   purple: '#cd3ef7',
   green: '#41f73e',
   yellow: '#f7dd3e',
-  orange: '#f76c17',
+  orange: '#f76c17'
 }
